@@ -1,0 +1,4 @@
+﻿VBA|Visual Basic For Applications|{000204EF-0000-0000-C000-000000000046}|4|2|C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA7.1\VBE7.DLL
+Access|Microsoft Access 16.0 Object Library|{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}|9|0|C:\Program Files (x86)\Microsoft Office\root\Office16\MSACC.OLB
+stdole|OLE Automation|{00020430-0000-0000-C000-000000000046}|2|0|C:\Windows\SysWOW64\stdole2.tlb
+DAO|Microsoft Office 16.0 Access database engine Object Library|{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}|12|0|C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\ACEDAO.DLL
