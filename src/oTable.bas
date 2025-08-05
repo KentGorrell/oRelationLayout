@@ -1,48 +1,54 @@
 Attribute VB_Name = "oTable"
+
+
 Option Compare Database
 Option Explicit
 
+
 Public Function LayoutTable_Add() As Boolean
 On Error GoTo Error_Handler
-Dim db As DAO.Database
-Dim rst As DAO.Recordset
-Dim tdf As DAO.TableDef
-Dim fld As DAO.Field
-Dim idx As DAO.Index
-Dim prp As DAO.Property
-Dim strTableName As String
+
+    Dim db As DAO.Database
+    Dim rst As DAO.Recordset
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim idx As DAO.Index
+    Dim prp As DAO.Property
+    Dim strTableName As String
 
     strTableName = "oSysRelationLayout"
     Set db = CurrentDb
-    On Error Resume Next
-        Set tdf = db.TableDefs(strTableName)
-        If Err <> 0 Then
-            ' create the table
-            Set tdf = db.CreateTableDef(strTableName)
-            Err.Clear
-            With tdf
-                Set fld = .CreateField("RelationLayout_Name", dbText, 100)
-                    fld.AllowZeroLength = False
-                    fld.Required = True
-                .Fields.Append fld
-                Set fld = .CreateField("Window_Name", dbText, 100)
-                    fld.AllowZeroLength = False
-                    fld.Required = True
-                .Fields.Append fld
-                Set idx = .CreateIndex("PrimaryKey")
-                    Set fld = idx.CreateField("RelationLayout_Name")
-                        idx.Fields.Append fld
-                    Set fld = idx.CreateField("Window_Name")
-                        idx.Fields.Append fld
-                        idx.Primary = True
-                .Indexes.Append idx
-            End With
-            db.TableDefs.Append tdf
-        Else
+    
+On Error Resume Next
+    Set tdf = db.TableDefs(strTableName)
+    If Err <> 0 Then
+        ' create the table
+        Set tdf = db.CreateTableDef(strTableName)
+        Err.Clear
+        With tdf
+            Set fld = .CreateField("RelationLayout_Name", dbText, 100)
+                fld.AllowZeroLength = False
+                fld.Required = True
+            .Fields.Append fld
+            Set fld = .CreateField("Window_Name", dbText, 100)
+                fld.AllowZeroLength = False
+                fld.Required = True
+            .Fields.Append fld
+            Set idx = .CreateIndex("PrimaryKey")
+                Set fld = idx.CreateField("RelationLayout_Name")
+                    idx.Fields.Append fld
+                Set fld = idx.CreateField("Window_Name")
+                    idx.Fields.Append fld
+                    idx.Primary = True
+            .Indexes.Append idx
+        End With
+        db.TableDefs.Append tdf
+    Else
             
-        End If
-    On Error GoTo 0
+    End If
+    
 On Error GoTo Error_Handler
+    
     db.TableDefs.Refresh
     Set tdf = db.TableDefs(strTableName)
     With tdf
@@ -90,8 +96,8 @@ End Function
 
 
 Public Sub Sample_Add()
-Dim rst As DAO.Recordset
-Dim strTableName As String
+    Dim rst As DAO.Recordset
+    Dim strTableName As String
 
     strTableName = "oSysRelationLayout"
 

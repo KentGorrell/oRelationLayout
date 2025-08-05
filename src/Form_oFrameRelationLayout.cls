@@ -47,12 +47,6 @@ Private Type tRect
 End Type
 
 
-Private Const AAAlength = 12
-Private Const FFFlength = 8
-Private Const Padding = 12
-Private Const NameLengthMax = 128
-' 64 Char MAX for a DAO Table Name * 2 = Unicode
-
 Private Declare PtrSafe Function ScreenToClient Lib "user32" _
                                                 (ByVal hwnd As LongPtr _
                                                  , lpPoint As POINTAPI _
@@ -64,12 +58,7 @@ Private Declare PtrSafe Function FindWindowEx Lib "user32" Alias "FindWindowExA"
                                                 , ByVal lpsz1 As String _
                                                 , ByVal lpsz2 As String _
                                                 ) As LongPtr
-Private Declare PtrSafe Function GetActiveWindow Lib "user32" () As LongPtr
 
-Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" _
-                                              (ByVal lpClassName As String _
-                                                , ByVal lpWindowName As String _
-                                                ) As LongPtr
 Private Declare PtrSafe Function GetWindow Lib "user32" _
                                                 (ByVal hwnd As LongPtr _
                                                 , ByVal wCmd As Long _
@@ -108,15 +97,16 @@ Private Const GW_CHILD = 5
 
 
 Public Sub Layout_Save(strID As String)
-Dim rst As DAO.Recordset
-Dim lngRet As Long
-Dim hWndMDI As LongPtr
-Dim hWndRel As LongPtr
-Dim hWndODsk As LongPtr
-Dim hWndTemp As LongPtr
-Dim rc As tRect
-Dim pt As POINTAPI
-Dim strWindowName As String
+
+    Dim rst As DAO.Recordset
+    Dim lngRet As Long
+    Dim hWndMDI As LongPtr
+    Dim hWndRel As LongPtr
+    Dim hWndODsk As LongPtr
+    Dim hWndTemp As LongPtr
+    Dim rc As tRect
+    Dim pt As POINTAPI
+    Dim strWindowName As String
 
     If Len(strID) = 0 Then
         MsgBox "You Must Enter a Key to identify this Relationship View"
@@ -237,30 +227,30 @@ End Sub
 
 
 Public Function Layout_Restore(strID As String) As Boolean
-
 On Error GoTo Err_Restore
- ' Create a recordset of the selected records
-Dim rst As DAO.Recordset
-Dim strSQL As String
+ 
+     ' Create a recordset of the selected records
+    Dim rst As DAO.Recordset
+    Dim strSQL As String
 
-Dim lngRet As Long
-Dim hWndMDI As LongPtr
-Dim hWndRel As LongPtr
-Dim hWndODsk As LongPtr
-Dim hWndTemp
+    Dim lngRet As Long
+    Dim hWndMDI As LongPtr
+    Dim hWndRel As LongPtr
+    Dim hWndODsk As LongPtr
+    Dim hWndTemp
 
-Dim strTableName As String
-Dim strWindowName As String
-Dim lngLeft As Long
-Dim lngTop As Long
-Dim lngRight As Long
-Dim lngBottom As Long
-Dim lngAdjust As Long
+    Dim strTableName As String
+    Dim strWindowName As String
+    Dim lngLeft As Long
+    Dim lngTop As Long
+    Dim lngRight As Long
+    Dim lngBottom As Long
+    Dim lngAdjust As Long
 
-Dim i As Long
+    Dim i As Long
 
-' Collection for Window Text and hWnd
-Dim colWindows As New Collection
+    ' Collection for Window Text and hWnd
+    Dim colWindows As New Collection
 
     ' Ensure we are zero
     hWndTemp = 0
@@ -392,9 +382,11 @@ Err_Restore:
 
 End Function
 
+
 Private Sub cmdClose_Click()
     DoCmd.Close
 End Sub
+
 
 Private Sub cmdDelete_Click()
 Dim strID As String
@@ -409,6 +401,7 @@ Dim strID As String
     Me.lstRelationLayout_Name.Requery
 End Sub
 
+
 Private Sub cmdNew_Click()
     Me.txtRelationLayout_Name = Null
     Me.txtRelationLayout_Name.SetFocus
@@ -420,8 +413,9 @@ Private Sub cmdRestore_Click()
     Layout_Restore (Me.lstRelationLayout_Name)
 End Sub
 
+
 Private Sub cmdSave_Click()
-Dim strLayoutName As String
+    Dim strLayoutName As String
 
     strLayoutName = Me.txtRelationLayout_Name & ""
     If strLayoutName = "" Then strLayoutName = Me.lstRelationLayout_Name & ""
@@ -438,24 +432,29 @@ Dim strLayoutName As String
     End If
 End Sub
 
+
 Private Sub Form_Open(Cancel As Integer)
 '    Addin_Load
 '    Me.oFrameRelationLayoutTable.SourceObject = "oFrameRelationLayoutTable"
     Call lstRelationLayout_Name_AfterUpdate
 End Sub
 
+
 Private Sub lblTitle_DblClick(Cancel As Integer)
     DoCmd.Close
 End Sub
+
 
 Private Sub lstRelationLayout_Name_AfterUpdate()
     Me.txtRelationLayout_Name = Me.lstRelationLayout_Name
     Call txtRelationLayout_Name_AfterUpdate
 End Sub
 
+
 Private Sub lstRelationLayout_Name_Click()
     Me.txtRelationLayout_Name = Me.lstRelationLayout_Name
 End Sub
+
 
 Private Sub txtRelationLayout_Name_AfterUpdate()
     FindMe
@@ -468,9 +467,12 @@ Private Sub txtRelationLayout_Name_AfterUpdate()
     Me.lblDelete.Caption = "Delete " & Me.lstRelationLayout_Name
 End Sub
 
+
 Private Sub txtRelationLayout_Name_Change()
     Me.cmdSave.Enabled = Len(Me.txtRelationLayout_Name.Text) > 0
 End Sub
+
+
 Public Function FindMe()
 Dim rst As DAO.Recordset
     Set rst = Me.RecordsetClone
@@ -479,25 +481,28 @@ Dim rst As DAO.Recordset
         If Not .NoMatch Then Me.Bookmark = .Bookmark
     End With
 End Function
+
+
 Public Sub Addin_Load()
 On Error GoTo Error_Handler
-Dim str As String
-Dim strTableName As String
-Dim qdf As QueryDef
-Dim tdf As TableDef
-Dim strFullPath As String
+    
+    Dim str As String
+    Dim strTableName As String
+    Dim qdf As QueryDef
+    Dim tdf As TableDef
+    Dim strFullPath As String
 
     strTableName = "oSysRelationLayout"
     strFullPath = CurrentProject.FullName
     ' check that the table exists in the current project
-    On Error Resume Next
-        Set tdf = CurrentDb.TableDefs(strTableName)
-        If Not Err = 0 Then
-            ' we need to transfer a copy or???
-            MsgBox "Table is missing", vbCritical, "Relation Layout"
-            GoTo Exit_Procedure
-        End If
-    On Error GoTo 0
+On Error Resume Next
+    Set tdf = CurrentDb.TableDefs(strTableName)
+    If Not Err = 0 Then
+        ' we need to transfer a copy or???
+        MsgBox "Table is missing", vbCritical, "Relation Layout"
+        GoTo Exit_Procedure
+    End If
+On Error GoTo 0
     If Not CodeDb Is CurrentDb Then
         strFullPath = CurrentProject.FullName
     End If
@@ -523,7 +528,7 @@ Dim strFullPath As String
     
 
 Exit_Procedure:
-    On Error Resume Next
+On Error Resume Next
     Exit Sub
 Error_Handler:
     MsgBox Err.Number & vbNewLine _

@@ -1,18 +1,24 @@
 Attribute VB_Name = "oFrameStartup"
+
+
 Option Compare Database
 Option Explicit
+
 
 Public Function Startup()
     Call Addin_Load
     DoCmd.OpenForm "oFrameRelationLayout"
 End Function
+
+
 Public Sub Addin_Load()
 On Error GoTo Error_Handler
-Dim str As String
-Dim strTableName As String
-Dim qdf As QueryDef
-Dim tdf As TableDef
-Dim strFullPath As String
+
+    Dim str As String
+    Dim strTableName As String
+    Dim qdf As QueryDef
+    Dim tdf As TableDef
+    Dim strFullPath As String
 
     strTableName = "oSysRelationLayout"
     strFullPath = CurrentProject.FullName
