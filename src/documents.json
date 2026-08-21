@@ -1,0 +1,21 @@
+﻿{
+  "Info": {
+    "Class": "clsDbDocument",
+    "Description": "Database Documents Properties (DAO)"
+  },
+  "Items": {
+    "Databases": {
+      "SummaryInfo": {
+        "Author": "Kent",
+        "Comments": "originally by Stephen Lebans. Download https://github.com/KentGorrell/oRelationLayout ",
+        "Company": "Osel Solutions",
+        "Title": "oRelationLayout 2.2.1"
+      }
+    },
+    "Tables": {
+      "USysRegInfo": {
+        "Description": "Add-in settings"
+      }
+    }
+  }
+}

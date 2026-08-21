@@ -1,0 +1,12 @@
+﻿{
+  "Info": {
+    "Class": "clsDbSharedImage",
+    "Description": "Shared Image Gallery Item"
+  },
+  "Items": {
+    "Name": "Osel",
+    "FileName": "Osel.png",
+    "Extension": "png",
+    "ContentHash": "1ec9d75"
+  }
+}

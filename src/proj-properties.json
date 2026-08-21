@@ -1,0 +1,10 @@
+﻿{
+  "Info": {
+    "Class": "clsDbProjProperty",
+    "Description": "Project Properties (Access)"
+  },
+  "Items": {
+    "VCS Build Path": "E:\\App\\oSys\\oRelationLayout\\oRelationLayout",
+    "VCS Source Path": "E:\\App\\oSys\\oRelationLayout\\oRelationLayout\\src"
+  }
+}
