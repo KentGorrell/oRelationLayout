@@ -1,0 +1,4 @@
+﻿SELECT
+  USysRegInfo.*
+FROM
+  USysRegInfo;

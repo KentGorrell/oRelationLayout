@@ -1,0 +1,7 @@
+﻿Subkey	Type	ValName	Value
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	0		
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	1	aReleaseDate	2026-08-18
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	1	aVersion	2.2.1
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	1	Description	Save and Restore Relation Layout, Osel Dev Framework, originally Lebans
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	1	Expression	=Startup()
+HKEY_CURRENT_ACCESS_PROFILE\\Menu Add-Ins\\oRelationLayout	1	Library	|ACCDIR\\oRelationLayout.accda
